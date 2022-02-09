@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import 'react-native-gesture-handler';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { HomeScreen } from './src/Pages';
 
-export default function App() {
+const Tabs = createBottomTabNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tabs.Navigator
+        initialRouteName='Home'
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, size, color }) => {
+            let iconName;
+            if (route.name == 'Home') {
+              iconName = focused ? 'home' : 'home-outline';
+            } else if (route.name == 'AddMovie') {
+              iconName = focused ? 'add' : 'add-outline';
+            }
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+        })}
+      >
+        <Tabs.Screen
+          options={{ headerShown: false }}
+          name='Home'
+          component={HomeScreen}
+        />
+      </Tabs.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
