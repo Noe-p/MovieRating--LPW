@@ -4,12 +4,7 @@ export const Input = (props) => {
   return (
     <View style={styles.inputContainer}>
       <Text>{props.label}</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={props.onChangeValue}
-        value={props.value}
-        placeholder={props.placeholder}
-      />
+      <TextInput style={styles.input} returnKeyType={'done'} {...props} />
     </View>
   );
 };

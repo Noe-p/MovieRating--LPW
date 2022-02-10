@@ -1,18 +1,21 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
-import { Input, Select, Submit, TextArea } from '../components';
+import { StyleSheet, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Input, Select, Submit, TextArea } from '../../components';
 
-export const AddMovieScreen = () => {
+const AddMovieStack = () => {
   const [title, onChangeTitle] = useState('');
-  const [note, onChangeNote] = useState();
+  const [note, onChangeNote] = useState('');
   const [description, onChangeDescription] = useState('');
+  const [comments, onChangeComments] = useState('');
+  const [imdb, onChangeImdb] = useState('');
 
   const navigation = useNavigation();
   navigation.setOptions({ title: 'Ajouter un film' });
 
   return (
-    <ScrollView
+    <KeyboardAwareScrollView
       style={{
         backgroundColor: 'white',
       }}
@@ -22,19 +25,32 @@ export const AddMovieScreen = () => {
           <Input
             label={'Titre'}
             value={title}
-            onChangeValue={onChangeTitle}
+            onChangeText={onChangeTitle}
             placeholder='Saisissez un titre'
           />
           <TextArea
             label={'Description'}
             value={description}
-            onChangeValue={onChangeDescription}
+            onChangeText={onChangeDescription}
             placeholder='Saisissez une description'
+          />
+          <TextArea
+            label={'Commentaire'}
+            value={comments}
+            onChangeText={onChangeComments}
+            placeholder='Saisissez un commentaire'
+          />
+          <Input
+            label={'Code IMBD'}
+            value={imdb}
+            onChangeText={onChangeImdb}
+            placeholder='Saisissez un code IMDB'
+            keyboardType='numeric'
           />
           <Select
             label={'Note'}
             value={note}
-            onChangeValue={onChangeNote}
+            onChangeText={onChangeNote}
             placeholder={'Saisissez une note'}
             items={[
               { label: '0', value: '0' },
@@ -51,13 +67,15 @@ export const AddMovieScreen = () => {
                 addedTitle: title,
                 addedNote: note,
                 addedDescription: description,
+                addedComments: comments,
+                addedImdb: imdb,
               })
             }
             label={'Ajouter'}
           />
         </View>
       </View>
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -73,3 +91,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+export default AddMovieStack;

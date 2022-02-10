@@ -4,13 +4,7 @@ export const TextArea = (props) => {
   return (
     <View style={styles.inputContainer}>
       <Text>{props.label}</Text>
-      <TextInput
-        style={styles.textArea}
-        onChangeText={props.onChangeValue}
-        value={props.value}
-        multiline={true}
-        placeholder={props.placeholder}
-      />
+      <TextInput style={styles.textArea} multiline={true} {...props} />
     </View>
   );
 };

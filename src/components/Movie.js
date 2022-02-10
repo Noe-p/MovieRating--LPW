@@ -29,6 +29,8 @@ export const Movie = (props) => {
               title: props.title,
               note: props.note,
               description: props.description,
+              comments: props.comments,
+              imdb: props.imdb,
             })
           }
           style={styles.buttonDesc}

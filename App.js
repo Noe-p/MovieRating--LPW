@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { HomeScreen } from './src/Pages';
+import HomeScreen from './src/Pages/HomePage/HomeScreen';
 
 const Tabs = createBottomTabNavigator();
 
@@ -16,8 +16,6 @@ const App = () => {
             let iconName;
             if (route.name == 'Home') {
               iconName = focused ? 'home' : 'home-outline';
-            } else if (route.name == 'AddMovie') {
-              iconName = focused ? 'add' : 'add-outline';
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },

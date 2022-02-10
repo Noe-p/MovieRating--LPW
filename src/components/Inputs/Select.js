@@ -7,7 +7,7 @@ export const Select = (props) => {
     <View style={styles.inputContainer}>
       <Text>{props.label}</Text>
       <RNPickerSelect
-        onValueChange={props.onChangeValue}
+        onValueChange={props.onChangeText}
         selectedValue={props.value}
         items={props.items}
         style={{

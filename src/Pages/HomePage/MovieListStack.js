@@ -5,18 +5,20 @@ import {
 } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { appStyles } from '../../assets/styles';
-import { Movie } from '../components';
+import { appStyles } from '../../../assets/styles';
+import { Movie } from '../../components';
 
-export const MovieList = () => {
+const MovieListStack = () => {
   const [movieList, setMovieList] = useState([
     {
       id: '0',
       title: 'Walk the Line',
       note: 2,
       img: '../../assets/img/walkTheLine.jpeg',
+      comments: 'Pas mal',
+      imdb: '0358273',
       description:
         "Johnny Cash n'est pas encore la plus célèbre star de son temps. L'histoire commence dans l'Arkansas, en pleine Dépression, lorsqu'il est simple fils de métayer. Quelques années plus tard, Cash sillonne les routes américaines lors de tournées éprouvantes, auprès des pionniers du rock, Elvis Presley, Carl Perkins, Roy Orbison, Jerry Lee Lewis et Waylon Jennings, avant de donner son inoubliable concert au pénitencier de Folsom, en 1968.",
     },
@@ -25,7 +27,7 @@ export const MovieList = () => {
   const route = useRoute();
   navigation.setOptions({ title: 'Liste des films' });
 
-  const addMovie = (title, note, description) => {
+  const addMovie = (title, note, description, comments, imdb) => {
     setMovieList((current) => [
       ...current,
       {
@@ -34,6 +36,8 @@ export const MovieList = () => {
         note: note,
         img: 'walkTheLine.jpeg',
         description: description,
+        comments: comments,
+        imdb: imdb,
       },
     ]);
   };
@@ -42,36 +46,41 @@ export const MovieList = () => {
     if (
       !route.params.addedTitle ||
       !route.params.addedNote ||
-      !route.params.addedDescription
+      !route.params.addedDescription ||
+      !route.params.addedComments ||
+      !route.params.addedImdb
     )
       return;
     addMovie(
       route.params.addedTitle,
       route.params.addedNote,
-      route.params.addedDescription
+      route.params.addedDescription,
+      route.params.addedComments,
+      route.params.addedImdb
     );
     route.params.addedTitle = null;
     route.params.addedNote = null;
     route.params.addedDescription = null;
+    route.params.addedComments = null;
+    route.params.addedImdb = null;
   });
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <View style={styles.movieList}>
-          {movieList.map((movie) => {
-            return (
-              <Movie
-                key={movie.id}
-                title={movie.title}
-                description={movie.description}
-                img={movie.img}
-                note={movie.note}
-              />
-            );
-          })}
-        </View>
-      </ScrollView>
+      <FlatList
+        style={styles.movieList}
+        data={movieList}
+        renderItem={({ item }) => (
+          <Movie
+            title={item.title}
+            description={item.description}
+            img={item.img}
+            note={item.note}
+            comments={item.comments}
+            imdb={item.imdb}
+          />
+        )}
+      />
       <Pressable
         style={styles.addMovieButton}
         onPress={() => {
@@ -93,8 +102,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   movieList: {
-    marginBottom: 100,
-    marginTop: 20,
+    paddingBottom: 100,
+    paddingTop: 20,
   },
   addMovieButton: {
     flex: 1,
@@ -107,3 +116,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#18020C',
   },
 });
+
+export default MovieListStack;
