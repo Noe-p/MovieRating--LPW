@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { appStyles } from '../../../assets/styles';
-import { Movie } from '../../components';
+import Movie from './Movie';
 
 const MovieListStack = () => {
   const [movieList, setMovieList] = useState([
@@ -16,9 +16,9 @@ const MovieListStack = () => {
       id: '0',
       title: 'Walk the Line',
       note: 2,
-      img: '../../assets/img/walkTheLine.jpeg',
+      img: 'https://image.tmdb.org/t/p/w500/zMkD6FVikyPNnigoupO7vD5ti9p.jpg',
       comments: 'Pas mal',
-      imdb: '0358273',
+      imdb: 'https://www.imdb.com/title/tt0358273/',
       description:
         "Johnny Cash n'est pas encore la plus célèbre star de son temps. L'histoire commence dans l'Arkansas, en pleine Dépression, lorsqu'il est simple fils de métayer. Quelques années plus tard, Cash sillonne les routes américaines lors de tournées éprouvantes, auprès des pionniers du rock, Elvis Presley, Carl Perkins, Roy Orbison, Jerry Lee Lewis et Waylon Jennings, avant de donner son inoubliable concert au pénitencier de Folsom, en 1968.",
     },
@@ -27,14 +27,14 @@ const MovieListStack = () => {
   const route = useRoute();
   navigation.setOptions({ title: 'Liste des films' });
 
-  const addMovie = (title, note, description, comments, imdb) => {
+  const addMovie = (title, note, description, comments, imdb, picture) => {
     setMovieList((current) => [
       ...current,
       {
         id: current.length,
         title: title,
         note: note,
-        img: 'walkTheLine.jpeg',
+        img: picture,
         description: description,
         comments: comments,
         imdb: imdb,
@@ -48,7 +48,7 @@ const MovieListStack = () => {
       !route.params.addedNote ||
       !route.params.addedDescription ||
       !route.params.addedComments ||
-      !route.params.addedImdb
+      !route.params.addedPicture
     )
       return;
     addMovie(
@@ -56,13 +56,15 @@ const MovieListStack = () => {
       route.params.addedNote,
       route.params.addedDescription,
       route.params.addedComments,
-      route.params.addedImdb
+      route.params.addedImdb,
+      route.params.addedPicture
     );
     route.params.addedTitle = null;
     route.params.addedNote = null;
     route.params.addedDescription = null;
     route.params.addedComments = null;
     route.params.addedImdb = null;
+    route.params.addedPicture = null;
   });
 
   return (
@@ -98,16 +100,17 @@ const MovieListStack = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   movieList: {
-    paddingBottom: 100,
     paddingTop: 20,
+    marginBottom: 58,
+    width: '100%',
   },
   addMovieButton: {
-    flex: 1,
     width: '100%',
+    flex: 1,
     position: 'absolute',
     bottom: 0,
     flexDirection: 'row',

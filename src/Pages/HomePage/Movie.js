@@ -8,15 +8,15 @@ import {
   View,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { appStyles } from '../../assets/styles';
+import { appStyles } from '../../../assets/styles/appStyles';
 
-export const Movie = (props) => {
+const Movie = (props) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <ImageBackground
         style={styles.image}
-        source={require('../../assets/img/walkTheLine.jpeg')}
+        source={{ uri: props.img }}
         imageStyle={{ borderRadius: 10 }}
       >
         <View style={styles.StarsContainer}>
@@ -31,6 +31,7 @@ export const Movie = (props) => {
               description: props.description,
               comments: props.comments,
               imdb: props.imdb,
+              img: props.img,
             })
           }
           style={styles.buttonDesc}
@@ -52,6 +53,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#BABFD1',
     paddingBottom: 20,
     marginBottom: 30,
+    width: '100%',
   },
   image: {
     width: 350,
@@ -88,3 +90,5 @@ const styles = StyleSheet.create({
     width: 60,
   },
 });
+
+export default Movie;

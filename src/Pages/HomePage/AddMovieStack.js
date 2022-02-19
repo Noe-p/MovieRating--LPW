@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { selectPicture } from '../../API/request';
 import { Input, Select, Submit, TextArea } from '../../components';
 
 const AddMovieStack = () => {
@@ -13,6 +14,8 @@ const AddMovieStack = () => {
 
   const navigation = useNavigation();
   navigation.setOptions({ title: 'Ajouter un film' });
+
+  const picture = selectPicture(title);
 
   return (
     <KeyboardAwareScrollView
@@ -59,6 +62,11 @@ const AddMovieStack = () => {
               { label: '3', value: '3' },
               { label: '4', value: '4' },
               { label: '5', value: '5' },
+              { label: '6', value: '6' },
+              { label: '7', value: '7' },
+              { label: '8', value: '8' },
+              { label: '9', value: '9' },
+              { label: '10', value: '10' },
             ]}
           />
           <Submit
@@ -68,7 +76,8 @@ const AddMovieStack = () => {
                 addedNote: note,
                 addedDescription: description,
                 addedComments: comments,
-                addedImdb: imdb,
+                addedImdb: 'https://www.imdb.com/title/tt' + imdb + '/',
+                addedPicture: picture,
               })
             }
             label={'Ajouter'}
@@ -84,9 +93,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
+    paddingBottom: 30,
   },
   form: {
-    width: '90%',
+    width: '100%',
     flex: 1,
     alignItems: 'center',
   },

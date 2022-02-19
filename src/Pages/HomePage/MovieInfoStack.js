@@ -14,44 +14,45 @@ const MovieInfoStack = () => {
   const navigation = useNavigation();
   const route = useRoute();
   navigation.setOptions({ title: 'Synopsis' });
-
   return (
     <ScrollView>
       <View style={styles.container}>
         <Text style={[appStyles.title1, styles.spacingTop]}>
           {route.params.title}
         </Text>
-        <Image
-          style={styles.image}
-          source={require('../../../assets/img/walkTheLine.jpeg')}
-        />
+        <Image style={styles.image} source={{ uri: route.params.img }} />
         <Rating
           style={styles.spacingTop}
           startingValue={route.params.note}
           imageSize={30}
           readonly
+          ratingCount={10}
         />
         <Text style={[appStyles.text, { width: '90%' }, styles.spacingTop]}>
           {route.params.description}
         </Text>
-        <Text style={[appStyles.title1, styles.spacingTop]}>Commentaire</Text>
-        <Text style={[appStyles.text, { width: '90%' }, styles.spacingTop]}>
-          {route.params.comments}
+        {route.params.comments !== 'none' && (
+          <View style={{ width: '90%' }}>
+            <Text style={[appStyles.title1, styles.spacingTop]}>
+              Commentaire
+            </Text>
+            <Text style={[appStyles.text, styles.spacingTop]}>
+              {route.params.comments}
+            </Text>
+          </View>
+        )}
+        <Text style={[appStyles.title1, { width: '90%' }, styles.spacingTop]}>
+          Lien IMDB
         </Text>
-        <Text style={[appStyles.title1, styles.spacingTop]}>Lien IMDB</Text>
         <Text
           style={[
             appStyles.text,
             { width: '90%', color: 'blue' },
             styles.spacingTop,
           ]}
-          onPress={() =>
-            Linking.openURL(
-              `https://www.imdb.com/title/tt${route.params.imdb}/`
-            )
-          }
+          onPress={() => Linking.openURL(route.params.imdb)}
         >
-          https://www.imdb.com/title/tt{route.params.imdb}/
+          {route.params.imdb}
         </Text>
       </View>
     </ScrollView>

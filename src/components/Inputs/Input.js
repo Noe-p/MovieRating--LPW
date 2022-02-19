@@ -11,7 +11,7 @@ export const Input = (props) => {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    width: '100%',
+    width: '90%',
     marginTop: 20,
     padding: 7,
     borderBottomWidth: 1,

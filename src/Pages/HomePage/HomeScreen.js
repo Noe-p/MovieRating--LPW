@@ -6,6 +6,7 @@ import MovieListStack from './MovieListStack';
 
 const HomeScreen = () => {
   const Stack = createStackNavigator();
+
   return (
     <Stack.Navigator initialRouteName='MovieList'>
       <Stack.Screen
@@ -17,6 +18,7 @@ const HomeScreen = () => {
           addedDescription: null,
           addedComments: null,
           addedImdb: null,
+          addedPicture: null,
         }}
       />
       <Stack.Screen name='AddMovie' component={AddMovieStack} />
