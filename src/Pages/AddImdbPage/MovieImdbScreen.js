@@ -16,6 +16,7 @@ const MovieImdbScreen = (props) => {
       addedDescription: props.description,
       addedComments: props.comments,
       addedImdb: props.imdb,
+      addedDate: props.date,
     });
   };
 

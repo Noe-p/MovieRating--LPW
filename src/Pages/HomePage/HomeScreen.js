@@ -19,6 +19,7 @@ const HomeScreen = () => {
           addedComments: null,
           addedImdb: null,
           addedPicture: null,
+          addedDate: null,
         }}
       />
       <Stack.Screen name='AddMovie' component={AddMovieStack} />

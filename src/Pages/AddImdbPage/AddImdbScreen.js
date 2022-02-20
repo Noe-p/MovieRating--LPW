@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { selectMovie } from '../../API/request';
-import { Input } from '../../components';
+import { InputSearch } from '../../components';
 import MovieImdbScreen from './MovieImdbScreen';
 
 const AddImdbScreen = () => {
@@ -14,12 +14,18 @@ const AddImdbScreen = () => {
 
   return (
     <View style={{ flex: 1, alignItems: 'center' }}>
-      <View style={{ width: '100%', flex: 1, alignItems: 'center' }}>
-        <Input
-          label={'Trouver un film'}
+      <View
+        style={{
+          width: '100%',
+          flex: 1,
+          alignItems: 'center',
+          backgroundColor: 'white',
+        }}
+      >
+        <InputSearch
           value={title}
           onChangeText={setTitle}
-          placeholder='Saisissez un film'
+          placeholder='Trouver un film'
         />
         <FlatList
           style={styles.flatList}
@@ -33,6 +39,7 @@ const AddImdbScreen = () => {
               comments={item.comments}
               imdb={item.imdb}
               picture={item.picture}
+              date={item.date}
             />
           )}
           keyExtractor={(item) => item.id}
@@ -44,7 +51,7 @@ const AddImdbScreen = () => {
 
 const styles = StyleSheet.create({
   flatList: {
-    marginTop: 20,
+    marginTop: 10,
     width: '100%',
     paddingLeft: '2%',
     paddingRight: '5%',

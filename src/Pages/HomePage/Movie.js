@@ -32,6 +32,7 @@ const Movie = (props) => {
               comments: props.comments,
               imdb: props.imdb,
               img: props.img,
+              date: props.date,
             })
           }
           style={styles.buttonDesc}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { formatDate } from '../service';
 const baseUrl = 'https://api.themoviedb.org/3/search/movie';
 const api_key = '2ee3dcd807e405603316fe1c5bb21dfb';
 
@@ -28,6 +29,7 @@ export const selectMovie = (title) => {
       comments: 'none',
       imdb: 'https://www.imdb.com/title/' + movie.imdb_id + '/',
       picture: 'https://image.tmdb.org/t/p/w500' + movie.poster_path,
+      date: formatDate(movie.release_date),
     };
   };
 

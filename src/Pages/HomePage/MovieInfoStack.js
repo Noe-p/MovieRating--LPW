@@ -41,19 +41,24 @@ const MovieInfoStack = () => {
             </Text>
           </View>
         )}
-        <Text style={[appStyles.title1, { width: '90%' }, styles.spacingTop]}>
-          Lien IMDB
-        </Text>
-        <Text
+        <View style={{ width: '90%', marginTop: 50 }}>
+          <Text style={{ fontWeight: 'bold' }}>Lien IMDB : </Text>
+          <Text
+            style={[appStyles.text, { width: '90%', color: 'blue' }]}
+            onPress={() => Linking.openURL(route.params.imdb)}
+          >
+            {route.params.imdb}
+          </Text>
+        </View>
+        <View
           style={[
-            appStyles.text,
-            { width: '90%', color: 'blue' },
             styles.spacingTop,
+            { flex: 1, flexDirection: 'row', width: '90%' },
           ]}
-          onPress={() => Linking.openURL(route.params.imdb)}
         >
-          {route.params.imdb}
-        </Text>
+          <Text style={{ fontWeight: 'bold' }}>Date de sortie : </Text>
+          <Text style={styles.date}>{route.params.date}</Text>
+        </View>
       </View>
     </ScrollView>
   );
@@ -75,6 +80,9 @@ const styles = StyleSheet.create({
   },
   spacingTop: {
     marginTop: 20,
+  },
+  date: {
+    color: 'grey',
   },
 });
 

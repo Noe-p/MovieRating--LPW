@@ -78,6 +78,7 @@ const AddMovieStack = () => {
                 addedComments: comments,
                 addedImdb: 'https://www.imdb.com/title/tt' + imdb + '/',
                 addedPicture: picture,
+                addedDate: new Date(),
               })
             }
             label={'Ajouter'}
