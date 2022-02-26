@@ -9,26 +9,14 @@ import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { appStyles } from '../../../assets/styles';
 import { SearchFilter } from '../../components';
-import { formatDate } from '../../service';
+import { movieListContent } from '../../content';
 import Movie from './Movie';
 
 const MovieListStack = () => {
-  const [movieList, setMovieList] = useState([
-    {
-      id: 0,
-      title: 'Walk the Line',
-      note: 2,
-      img: 'https://image.tmdb.org/t/p/w500/zMkD6FVikyPNnigoupO7vD5ti9p.jpg',
-      comments: 'Pas mal',
-      imdb: 'https://www.imdb.com/title/tt0358273/',
-      date: formatDate(new Date()),
-      description:
-        "Johnny Cash n'est pas encore la plus célèbre star de son temps. L'histoire commence dans l'Arkansas, en pleine Dépression, lorsqu'il est simple fils de métayer. Quelques années plus tard, Cash sillonne les routes américaines lors de tournées éprouvantes, auprès des pionniers du rock, Elvis Presley, Carl Perkins, Roy Orbison, Jerry Lee Lewis et Waylon Jennings, avant de donner son inoubliable concert au pénitencier de Folsom, en 1968.",
-    },
-  ]);
+  const [movieList, setMovieList] = useState(movieListContent);
   const navigation = useNavigation();
   const route = useRoute();
-  navigation.setOptions({ title: 'Liste des films' });
+  navigation.setOptions({ title: 'Movie Ratings' });
   const [currentMovieList, setCurrentMovieList] = useState([]);
 
   const addMovie = (
@@ -126,7 +114,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   movieList: {
-    marginTop: 5,
+    marginTop: 10,
     marginBottom: 58,
     width: '100%',
   },

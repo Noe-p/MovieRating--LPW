@@ -8,7 +8,7 @@ export const SearchFilter = (props) => {
   const [note, setNote] = useState('');
   const [titleSearch, setTitleSearch] = useState('');
   const [date, setDate] = useState('');
-  const [onSearch, setOnSearch] = useState(false);
+  const [openFilters, setOpenFilters] = useState(false);
 
   useEffect(() => {
     const m = [...props.movieList];
@@ -35,35 +35,20 @@ export const SearchFilter = (props) => {
     );
   }, [titleSearch, note, props.movieList, date]);
 
-  const onPressSearch = () => {
-    setOnSearch(onSearch ? false : true);
-  };
-
-  const toogleHeightSearch = () => {
+  const toogleDisplayFilters = () => {
     return {
-      height: onSearch ? 130 : 80,
-    };
-  };
-
-  const toogleOpacitySearch = () => {
-    return {
-      display: onSearch ? 'flex' : 'none',
+      display: openFilters ? 'flex' : 'none',
     };
   };
 
   return (
-    <View
-      style={[
-        toogleHeightSearch(),
-        { justifyContent: 'center', alignItems: 'center' },
-      ]}
-    >
+    <View style={[{ justifyContent: 'center', alignItems: 'center' }]}>
       <InputSearch
         value={titleSearch}
         onChangeText={setTitleSearch}
         placeholder='Trouver un film'
       />
-      <View style={[styles.dateAndRate, toogleOpacitySearch()]}>
+      <View style={[styles.dateAndRate, toogleDisplayFilters()]}>
         <View style={styles.select}>
           <Ionicons
             name='star'
@@ -126,10 +111,10 @@ export const SearchFilter = (props) => {
       </View>
       <TouchableOpacity
         style={styles.containerMoreFilter}
-        onPress={onPressSearch}
+        onPress={() => setOpenFilters(openFilters ? false : true)}
       >
         <Text style={styles.textMoreFilter}>
-          {onSearch ? 'Moins de filtres' : 'Plus de filtres'}
+          {openFilters ? 'Moins de filtres' : 'Plus de filtres'}
         </Text>
       </TouchableOpacity>
     </View>

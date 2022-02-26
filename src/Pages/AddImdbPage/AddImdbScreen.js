@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { selectMovie } from '../../API/request';
 import { InputSearch } from '../../components';
-import MovieImdbScreen from './MovieImdbScreen';
+import MovieImdb from './MovieImdb';
 
 const AddImdbScreen = () => {
   const navigation = useNavigation();
@@ -31,7 +31,7 @@ const AddImdbScreen = () => {
           style={styles.flatList}
           data={movieList}
           renderItem={({ item }) => (
-            <MovieImdbScreen
+            <MovieImdb
               submit={navigation}
               title={item.title}
               note={item.note}

@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { appStyles } from '../../../assets/styles';
 
-const MovieImdbScreen = (props) => {
+const MovieImdb = (props) => {
   const [iconName, setIconName] = useState('heart-outline');
 
   const setIcon = () => {
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MovieImdbScreen;
+export default MovieImdb;

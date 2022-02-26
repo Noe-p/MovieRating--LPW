@@ -41,10 +41,16 @@ const MovieInfoStack = () => {
             </Text>
           </View>
         )}
-        <View style={{ width: '90%', marginTop: 50 }}>
+        <View
+          style={{
+            width: '90%',
+            marginTop: 50,
+            flexDirection: 'row',
+          }}
+        >
           <Text style={{ fontWeight: 'bold' }}>Lien IMDB : </Text>
           <Text
-            style={[appStyles.text, { width: '90%', color: 'blue' }]}
+            style={[appStyles.text, { color: 'blue' }]}
             onPress={() => Linking.openURL(route.params.imdb)}
           >
             {route.params.imdb}
