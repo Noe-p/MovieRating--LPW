@@ -5,10 +5,11 @@ import React, { useState } from 'react';
 import 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { isLogged, usersContent } from './src/content';
-import AddImdbScreen from './src/Pages/AddImdbPage/AddImdbScreen';
-import HomeScreen from './src/Pages/HomePage/HomeScreen';
-import CreateUser from './src/Pages/Login/CreateUser';
-import Login from './src/Pages/Login/Login';
+import AddImdbTabs from './src/pages/AddImdbPage/AddImdbTabs';
+import HomeTabs from './src/pages/HomePage/HomeTabs';
+import CreateUserStack from './src/pages/Login/CreateUserStack';
+import LoginStack from './src/pages/Login/LoginStack';
+import ProfilTabs from './src/pages/Profil/ProfilTabs';
 
 const App = () => {
   const Tabs = createBottomTabNavigator();
@@ -16,6 +17,7 @@ const App = () => {
 
   const [login, setLogin] = useState(isLogged);
   const [users, setUsers] = useState(usersContent);
+  const [user, setUser] = useState();
 
   if (login) {
     return (
@@ -29,17 +31,22 @@ const App = () => {
                 iconName = focused ? 'home' : 'home-outline';
               } else if (route.name == 'AddImdb') {
                 iconName = focused ? 'add' : 'add-outline';
+              } else if (route.name == 'Profil') {
+                iconName = focused ? 'person' : 'person-outline';
               }
               return <Ionicons name={iconName} size={size} color={color} />;
             },
           })}
         >
-          <Tabs.Screen
-            options={{ headerShown: false }}
-            name='Home'
-            component={HomeScreen}
-          />
-          <Tabs.Screen name='AddImdb' component={AddImdbScreen} />
+          <Tabs.Screen options={{ headerShown: false }} name='Home'>
+            {() => <HomeTabs user={user} />}
+          </Tabs.Screen>
+          <Tabs.Screen name='AddImdb' component={AddImdbTabs} />
+          <Tabs.Screen name='Profil'>
+            {() => (
+              <ProfilTabs user={user} setUser={setUser} setLogin={setLogin} />
+            )}
+          </Tabs.Screen>
         </Tabs.Navigator>
       </NavigationContainer>
     );
@@ -50,21 +57,23 @@ const App = () => {
           <Stack.Screen
             options={{ headerShown: false }}
             name='Login'
-            component={() => (
-              <Login users={users} setUsers={setUsers} setLogin={setLogin} />
-            )}
             initialParams={{
               addedEmail: null,
               addedPassword: null,
               addedLastName: null,
               addedFirstName: null,
             }}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name='CreateUser'
-            component={CreateUser}
-          />
+          >
+            {() => (
+              <LoginStack
+                users={users}
+                setUsers={setUsers}
+                setUser={setUser}
+                setLogin={setLogin}
+              />
+            )}
+          </Stack.Screen>
+          <Stack.Screen name='CreateUser' component={CreateUserStack} />
         </Stack.Navigator>
       </NavigationContainer>
     );

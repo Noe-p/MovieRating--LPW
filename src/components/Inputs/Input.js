@@ -1,10 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
+
 export const Input = (props) => {
   return (
     <View style={styles.inputContainer}>
       <Text>{props.label}</Text>
-      <TextInput style={styles.input} returnKeyType={'done'} {...props} />
+      <TextInput
+        style={styles.input}
+        autoCapitalize='none'
+        returnKeyType={'done'}
+        {...props}
+      />
     </View>
   );
 };

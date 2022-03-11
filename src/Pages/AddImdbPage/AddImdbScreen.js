@@ -1,46 +1,32 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { selectMovie } from '../../API/request';
-import { InputSearch } from '../../components';
-import MovieImdb from './MovieImdb';
+import { Input, Submit } from '../../components';
+import MovieScreen from './MovieScreen';
 
 const AddImdbScreen = () => {
   const navigation = useNavigation();
   navigation.setOptions({ title: 'Ajouter' });
   const [title, setTitle] = useState('');
+  const [submit, setSubmit] = useState('');
 
-  const movieList = selectMovie(title);
-
+  const movieList = submit ? selectMovie(submit) : [];
   return (
     <View style={{ flex: 1, alignItems: 'center' }}>
-      <View
-        style={{
-          width: '100%',
-          flex: 1,
-          alignItems: 'center',
-          backgroundColor: 'white',
-        }}
-      >
-        <InputSearch
+      <View style={{ width: '90%', flex: 1, alignItems: 'center' }}>
+        <Input
+          label={'Choisir un film'}
           value={title}
           onChangeText={setTitle}
-          placeholder='Trouver un film'
+          placeholder='Saisissez un film'
         />
+        <Submit onPress={() => setSubmit(title)} label={'Ajouter'} />
         <FlatList
-          style={styles.flatList}
+          style={{ marginTop: 20 }}
           data={movieList}
           renderItem={({ item }) => (
-            <MovieImdb
-              submit={navigation}
-              title={item.title}
-              note={item.note}
-              description={item.description}
-              comments={item.comments}
-              imdb={item.imdb}
-              picture={item.picture}
-              date={item.date}
-            />
+            <MovieScreen title={item.title} picture={item.picture} />
           )}
           keyExtractor={(item) => item.id}
         />
@@ -48,14 +34,5 @@ const AddImdbScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  flatList: {
-    marginTop: 10,
-    width: '100%',
-    paddingLeft: '2%',
-    paddingRight: '5%',
-  },
-});
 
 export default AddImdbScreen;

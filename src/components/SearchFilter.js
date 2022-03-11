@@ -4,7 +4,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { InputDate, InputSearch } from '.';
 
-export const SearchFilter = (props) => {
+const SearchFilter = (props) => {
   const [note, setNote] = useState('');
   const [titleSearch, setTitleSearch] = useState('');
   const [date, setDate] = useState('');
@@ -148,3 +148,5 @@ const styles = StyleSheet.create({
     color: 'grey',
   },
 });
+
+export default SearchFilter;

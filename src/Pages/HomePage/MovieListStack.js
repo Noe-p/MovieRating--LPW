@@ -8,12 +8,11 @@ import React, { useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { appStyles } from '../../../assets/styles';
-import { SearchFilter } from '../../components';
-import { movieListContent } from '../../content';
+import SearchFilter from '../../components/SearchFilter';
 import Movie from './Movie';
 
-const MovieListStack = () => {
-  const [movieList, setMovieList] = useState(movieListContent);
+const MovieListStack = (props) => {
+  const [movieList, setMovieList] = useState(props.user.movieList);
   const navigation = useNavigation();
   const route = useRoute();
   navigation.setOptions({ title: 'Movie Ratings' });

@@ -1,15 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { appStyles } from '../../../assets/styles';
 import { Input, Submit } from '../../components';
 import { emailValidation } from '../../service';
 
-const CreateUser = () => {
+const CreateUserStack = () => {
   const navigation = useNavigation();
+  navigation.setOptions({ title: 'Inscription' });
 
-  const [isCorrect, setIsCorrect] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
 
   const [email, setEmail] = useState('');
@@ -20,17 +20,17 @@ const CreateUser = () => {
 
   const addUsers = () => {
     if (
-      email === '' &&
-      password === '' &&
-      firstName === '' &&
-      lastName === '' &&
+      email === '' ||
+      password === '' ||
+      firstName === '' ||
+      lastName === '' ||
       confirmPassword === ''
     ) {
-      setIsCorrect(1);
+      setErrorMessage('Veuillez compléter tout le formulaire');
     } else if (!emailValidation(email)) {
-      setIsCorrect(2);
+      setErrorMessage('Email incorrecte');
     } else if (password !== confirmPassword) {
-      setIsCorrect(3);
+      setErrorMessage('Les mots de passes ne sont pas identiques');
     } else {
       navigation.navigate('Login', {
         addedEmail: email,
@@ -41,23 +41,6 @@ const CreateUser = () => {
     }
   };
 
-  useEffect(() => {
-    switch (isCorrect) {
-      case 0:
-        setErrorMessage('');
-        break;
-      case 1:
-        setErrorMessage('Veuillez compléter tout le formulaire');
-        break;
-      case 2:
-        setErrorMessage('Email incorrecte');
-        break;
-      case 3:
-        setErrorMessage('Les mots de passes ne sont pas identiques');
-        break;
-    }
-  });
-
   return (
     <KeyboardAwareScrollView
       style={{
@@ -65,7 +48,6 @@ const CreateUser = () => {
       }}
     >
       <View style={styles.container}>
-        <Text style={appStyles.title1}>Créer un compte</Text>
         <View style={styles.form}>
           <Input
             label={'Nom'}
@@ -84,6 +66,7 @@ const CreateUser = () => {
             value={email}
             onChangeText={setEmail}
             placeholder='Saisissez votre email'
+            keyboardType='email-address'
           />
           <Input
             secureTextEntry={true}
@@ -103,7 +86,7 @@ const CreateUser = () => {
             {errorMessage}
           </Text>
 
-          <Submit label={'Créer un compte'} onPress={addUsers} />
+          <Submit label={'Continuer'} onPress={addUsers} />
         </View>
       </View>
     </KeyboardAwareScrollView>
@@ -117,7 +100,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 30,
-    marginTop: 50,
+    marginTop: 20,
   },
   form: {
     width: '100%',
@@ -134,4 +117,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateUser;
+export default CreateUserStack;

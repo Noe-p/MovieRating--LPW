@@ -1,19 +1,17 @@
-import {
-  useFocusEffect,
-  useNavigation,
-  useRoute,
-} from '@react-navigation/native';
-import { useState } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { appStyles } from '../../../assets/styles';
 import { Input, Submit } from '../../components';
-const Login = (props) => {
+
+const LoginStack = (props) => {
   const navigation = useNavigation();
   const route = useRoute();
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   const addUser = (addEmail, addPassword, addLastName, addFirstName) => {
     props.setUsers((current) => [
@@ -24,11 +22,12 @@ const Login = (props) => {
         password: addPassword,
         lastName: addLastName,
         firstName: addFirstName,
+        movieList: [],
       },
     ]);
   };
 
-  useFocusEffect(() => {
+  useEffect(() => {
     if (
       !route.params.addedEmail ||
       !route.params.addedPassword ||
@@ -52,6 +51,7 @@ const Login = (props) => {
     props.users.map((user) => {
       if (user.email === email && user.password === password) {
         props.setLogin(true);
+        props.setUser(user);
       } else {
         setErrorMessage('Email ou mot de passe incorrecte');
       }
@@ -60,13 +60,14 @@ const Login = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={appStyles.title1}>Connection</Text>
+      <Text style={appStyles.title1}>Connexion</Text>
       <View style={styles.form}>
         <Input
           label={'Email'}
           value={email}
           onChangeText={setEmail}
           placeholder='Saisissez votre email'
+          keyboardType='email-address'
         />
         <Input
           secureTextEntry={true}
@@ -114,4 +115,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default LoginStack;
