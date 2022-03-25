@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
-import { selectMovie } from '../../api/request';
+import { selectMovie } from '../../API/request';
 import { InputSearch } from '../../components';
 import MovieImdb from './MovieImdb';
 

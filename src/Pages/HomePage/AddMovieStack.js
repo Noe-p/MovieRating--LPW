@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { selectPicture } from '../../api/request';
+import { selectPicture } from '../../API/request';
 import { Input, Select, Submit, TextArea } from '../../components';
 
 const AddMovieStack = () => {

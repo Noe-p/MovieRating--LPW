@@ -5,11 +5,11 @@ import React, { useState } from 'react';
 import 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { isLogged, usersContent } from './src/content';
-import AddImdbTabs from './src/pages/AddImdbPage/AddImdbTabs';
-import HomeTabs from './src/pages/HomePage/HomeTabs';
-import CreateUserStack from './src/pages/Login/CreateUserStack';
-import LoginStack from './src/pages/Login/LoginStack';
-import ProfilTabs from './src/pages/Profil/ProfilTabs';
+import AddImdbTabs from './src/Pages/AddImdbPage/AddImdbTabs';
+import HomeTabs from './src/Pages/HomePage/HomeTabs';
+import CreateUserStack from './src/Pages/Login/CreateUserStack';
+import LoginStack from './src/Pages/Login/LoginStack';
+import ProfilTabs from './src/Pages/Profil/ProfilTabs';
 
 const App = () => {
   const Tabs = createBottomTabNavigator();
